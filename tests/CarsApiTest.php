@@ -22,7 +22,7 @@ class CarsApiTest extends WebTestCase
         $buildDate->modify("-1 year");
         $carData = ['model' => 'Focus', 'make' => 'Ford', 'color' => 'white', 'buildDate' => $buildDate->format('Y-m-d')];
 
-        $this->client->request('PUT', '/cars', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($carData));
+        $this->client->request('POST', '/cars', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($carData));
         $response = $this->client->getResponse();
         $responseData = json_decode($response->getContent(), true);
         $this->assertResponseIsSuccessful();
@@ -92,7 +92,7 @@ class CarsApiTest extends WebTestCase
         $buildDate->modify("-1 year");
         $carData = ['model' => 'Focus', 'make' => 'Ford', 'color' => 'modrá', 'buildDate' => $buildDate->format('Y-m-d')];
 
-        $this->client->request('PUT', '/cars', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($carData));
+        $this->client->request('POST', '/cars', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($carData));
 
         $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
     }
@@ -103,7 +103,7 @@ class CarsApiTest extends WebTestCase
         $buildDate->modify("-1 year");
         $carData = ['make' => 'Ford', 'color' => 'white', 'buildDate' => $buildDate->format('Y-m-d')];
 
-        $this->client->request('PUT', '/cars', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($carData));
+        $this->client->request('POST', '/cars', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($carData));
 
         $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
     }
@@ -114,7 +114,7 @@ class CarsApiTest extends WebTestCase
         $buildDate->modify("-1 year");
         $carData = ['model' => 'Focus', 'color' => 'black', 'buildDate' => $buildDate->format('Y-m-d')];
 
-        $this->client->request('PUT', '/cars', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($carData));
+        $this->client->request('POST', '/cars', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($carData));
 
         $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
     }
@@ -125,7 +125,7 @@ class CarsApiTest extends WebTestCase
         $buildDate->modify("-10 year");
         $carData = ['model' => 'Focus', 'make' => 'Ford', 'color' => 'white', 'buildDate' => $buildDate->format('Y-m-d')];
 
-        $this->client->request('PUT', '/cars', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($carData));
+        $this->client->request('POST', '/cars', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($carData));
 
         $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
     }

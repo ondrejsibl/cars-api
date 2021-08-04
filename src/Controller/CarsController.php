@@ -30,7 +30,7 @@ class CarsController extends AbstractController
     }
 
     /**
-     * @Route("/cars", name="add-car", methods={"PUT"})
+     * @Route("/cars", name="add-car", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
      * @throws \Exception

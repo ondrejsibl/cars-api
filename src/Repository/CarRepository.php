@@ -24,7 +24,9 @@ class CarRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('c');
 
-        return $qb->where('c.id =:id')
+        return $qb->addSelect('co')
+            ->leftJoin('c.color', 'co')
+            ->where('c.id =:id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
@@ -34,7 +36,9 @@ class CarRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('c');
 
-        return $qb->orderBy('c.make', 'ASC')->addOrderBy('c.model', 'ASC')->getQuery()
+        return $qb->addSelect('co')
+            ->leftJoin('c.color', 'co')
+            ->orderBy('c.make', 'ASC')->addOrderBy('c.model', 'ASC')->getQuery()
             ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
 
